@@ -1,0 +1,47 @@
+﻿@page
+@model ProjetosCelo.Pages.Amostras.IndexModel
+@{
+    ViewData["Title"] = "Listar Amostras";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Responsável</th>
+            <th>Histórico</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var amostra in Model.Amostras)
+        {
+            <tr>
+                <td>@amostra.Nome</td>
+                <td>@amostra.Descricao</td>
+                <td>@amostra.ResponsavelNome</td>
+                <td>
+                    <ul>
+                        @foreach (var historico in amostra.Historicos)
+                        {
+                            <li>
+                                <strong>Data:</strong> @historico.Data.ToString("dd/MM/yyyy HH:mm:ss")
+                                <br />
+                                <strong></strong> @historico.Observacao
+                            </li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@amostra.Id">Editar</a> |
+                    <a asp-page="./Delete" asp-route-id="@amostra.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-page="./Create">Cadastrar Nova Amostra</a>
