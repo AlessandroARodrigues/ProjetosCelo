@@ -36,12 +36,12 @@
                     </ul>
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@amostra.Id">Editar</a> |
-                    <a asp-page="./Delete" asp-route-id="@amostra.Id">Excluir</a>
+                    <a asp-page="./Edit" asp-route-id="@amostra.Id" class="btn btn-secondary btn-sm">Editar</a>
+                    <a asp-page="./Delete" asp-route-id="@amostra.Id" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
-        }
+            
+        }      
     </tbody>
 </table>
 
-<a asp-page="./Create">Cadastrar Nova Amostra</a>

@@ -1,116 +1,114 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
-/* Estilo global */
-/*body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho dos elementos */
+}
+
+/* Corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}*/
+    flex-direction: column;
+    min-height: 100vh; /* Garante que ocupe toda a altura da tela */
+    overflow-x: hidden; /* Remove o scroll horizontal */
+    margin: 0; /* Remove margens padrão do body */
+}
 
 /* Container principal */
 .login-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    flex: 1; /* Faz com que o container ocupe todo o espaço disponível */
+    background-color: #f8f9fa; /* Cor de fundo */
+    padding: 1rem; /* Adiciona espaço nas bordas para evitar problemas em telas pequenas */
+    box-sizing: border-box; /* Garante que o padding não afete a largura total */
+    overflow: hidden; /* Remove qualquer overflow interno */
 }
 
 /* Caixa de login */
 .login-box {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+    background-color: #ffffff; /* Fundo branco */
+    padding: 2rem; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%; /* Ocupa 100% da largura disponível */
+    max-width: 400px; /* Limita a largura máxima */
+    text-align: center; /* Alinha o texto ao centro */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
 }
-
-    /* Título */
-    .login-box h2 {
-        margin-bottom: 1.5rem;
-        color: #333333;
-    }
 
 /* Formulário */
 .login-form {
-    text-align: left;
+    text-align: left; /* Alinha os campos à esquerda */
+    overflow: hidden; /* Remove qualquer overflow interno */
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; /* Espaçamento entre os campos */
 }
 
 .form-control {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+    width: 100%; /* Ocupa toda a largura disponível */
+    padding: 0.75rem; /* Espaçamento interno */
+    border: 1px solid #ced4da; /* Borda padrão */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 1rem; /* Tamanho da fonte */
+    transition: border-color 0.3s ease; /* Transição suave para o foco */
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
 }
 
     .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        border-color: #007bff; /* Cor da borda no foco */
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra no foco */
     }
 
 /* Botão */
 .btn-primary {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    color: #ffffff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    width: 100%; /* Ocupa toda a largura disponível */
+    padding: 0.75rem; /* Espaçamento interno */
+    background-color: #007bff; /* Cor de fundo */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    color: #ffffff; /* Cor do texto */
+    font-size: 1rem; /* Tamanho da fonte */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: background-color 0.3s ease; /* Transição suave para o hover */
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
 }
 
     .btn-primary:hover {
-        background-color: #0056b3;
+        background-color: #0056b3; /* Cor de fundo no hover */
     }
 
 /* Checkbox */
 .form-check-input {
-    margin-top: 0.3rem;
+    margin-top: 0.3rem; /* Espaçamento superior */
 }
 
 .form-check-label {
-    margin-left: 0.5rem;
-    font-size: 0.9rem;
+    margin-left: 0.5rem; /* Espaçamento à esquerda */
+    font-size: 0.9rem; /* Tamanho da fonte */
 }
 
 /* Mensagens de erro */
 .text-danger {
-    font-size: 0.9rem;
-    color: #dc3545;
+    font-size: 0.9rem; /* Tamanho da fonte */
+    color: #dc3545; /* Cor do texto */
+}
+
+/* Footer fixo */
+footer {
+    position: fixed; /* Fixa o footer na tela */
+    bottom: 0; /* Posiciona o footer na parte inferior */
+    left: 0;
+    width: 100%; /* Ocupa toda a largura da tela */
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem;
+    z-index: 1000; /* Garante que o footer fique acima de outros elementos */
 }

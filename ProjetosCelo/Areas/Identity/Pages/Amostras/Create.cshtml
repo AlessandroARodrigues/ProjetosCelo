@@ -4,31 +4,36 @@
     ViewData["Title"] = "Cadastrar Amostra";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="create-container">
+    <h2>@ViewData["Title"]</h2>
+    <form method="post" class="create-form">
+        <div class="form-group">
+            <label asp-for="Amostra.Nome">Nome</label>
+            <input asp-for="Amostra.Nome" class="form-control" placeholder="Digite o nome da amostra" />
+            <span asp-validation-for="Amostra.Nome" class="text-danger"></span>
+        </div>
 
-<form method="post">
-    <div>
-        <label asp-for="Amostra.Nome"></label>
-        <input asp-for="Amostra.Nome" />
-        <span asp-validation-for="Amostra.Nome" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Amostra.Descricao"></label>
-        <textarea asp-for="Amostra.Descricao"></textarea>
-        <span asp-validation-for="Amostra.Descricao" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Amostra.ResponsavelNome"></label>
-        <input asp-for="Amostra.ResponsavelNome" />
-        <span asp-validation-for="Amostra.ResponsavelNome" class="text-danger"></span>
-    </div>
-    <div>
-        <label for="historicoObservacao">Observação do Histórico:</label>
-        <textarea id="historicoObservacao" name="historicoObservacao"></textarea>
-        <span class="text-danger">@Html.ValidationMessage("historicoObservacao")</span>
-    </div>
-    <button type="submit">Cadastrar</button>
-</form>
+        <div class="form-group">
+            <label asp-for="Amostra.Descricao">Descrição</label>
+            <textarea asp-for="Amostra.Descricao" class="form-control" rows="4" placeholder="Descreva a amostra"></textarea>
+            <span asp-validation-for="Amostra.Descricao" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Amostra.ResponsavelNome">Responsável</label>
+            <input asp-for="Amostra.ResponsavelNome" class="form-control" placeholder="Digite o nome do responsável" />
+            <span asp-validation-for="Amostra.ResponsavelNome" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="historicoObservacao">Observação do Histórico</label>
+            <textarea id="historicoObservacao" name="historicoObservacao" class="form-control" rows="3" placeholder="Adicione uma observação"></textarea>
+            <span class="text-danger">@Html.ValidationMessage("historicoObservacao")</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

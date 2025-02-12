@@ -4,11 +4,20 @@ using ProjetosCelo.DB;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-// Configuração do Identity
+// Configuração do DbContext para MySQL
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+    )
+);
+
+// Configuração do Identity (Escolha uma das opções abaixo)
+
+// Opção 1: AddDefaultIdentity (Simplificado)
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.Password.RequireDigit = true;
@@ -16,14 +25,22 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 6;
-
     options.User.RequireUniqueEmail = false; // Permite que o email seja nulo ou não único
 })
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// Configuração do SQLite (ou outro banco de dados)
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Opção 2: AddIdentity (Avançado, com Roles)
+// builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+// {
+//     options.Password.RequireDigit = true;
+//     options.Password.RequireLowercase = false;
+//     options.Password.RequireUppercase = false;
+//     options.Password.RequireNonAlphanumeric = false;
+//     options.Password.RequiredLength = 6;
+//     options.User.RequireUniqueEmail = false; // Permite que o email seja nulo ou não único
+// })
+// .AddEntityFrameworkStores<ApplicationDbContext>()
+// .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
@@ -42,15 +59,12 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//// Redirecionamento padrão para a página de login
+// Redirecionamento padrão para a página de login
 app.MapGet("/", context =>
 {
-//context.Response.Redirect("/Identity/Amostras/Create"); // Direciona para a página de cadastro
-  context.Response.Redirect("/Identity/Account/Login");
-return Task.CompletedTask;
+    context.Response.Redirect("/Identity/Account/Login");
+    return Task.CompletedTask;
 });
-
-
 
 // Habilitar áreas
 app.MapRazorPages();
@@ -60,4 +74,3 @@ app.MapAreaControllerRoute(
     pattern: "Identity/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
