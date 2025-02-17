@@ -12,7 +12,7 @@ using ProjetosCelo.DB;
 namespace ProjetosCelo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250212180639_InitialCreate")]
+    [Migration("20250215223942_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -233,7 +233,15 @@ namespace ProjetosCelo.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Aplicacao")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Fornecedor")
                         .IsRequired()
                         .HasColumnType("longtext");
 

@@ -3,32 +3,59 @@
 @{
     ViewData["Title"] = "Editar Amostra";
 }
+<div >
+    <h2>@ViewData["Title"]</h2>
+    <form method="post">
+        <input type="hidden" asp-for="Amostra.Id" />
 
-<h2>@ViewData["Title"]</h2>
+        <!-- Nome -->
+        <div class="form-group col-md-6">
+            <label asp-for="Amostra.Nome">Nome</label>
+            <input asp-for="Amostra.Nome" class="form-control form-control-sm" placeholder="Digite o nome da amostra" />
+            <span asp-validation-for="Amostra.Nome" class="text-danger"></span>
+        </div>
 
-<form method="post">
-    <input type="hidden" asp-for="Amostra.Id" />
-    <div>
-        <label asp-for="Amostra.Nome"></label>
-        <input asp-for="Amostra.Nome" />
-        <span asp-validation-for="Amostra.Nome" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Amostra.Descricao"></label>
-        <textarea asp-for="Amostra.Descricao"></textarea>
-        <span asp-validation-for="Amostra.Descricao" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Amostra.ResponsavelNome"></label>
-        <input asp-for="Amostra.ResponsavelNome" />
-        <span asp-validation-for="Amostra.ResponsavelNome" class="text-danger"></span>
-    </div>
-    <div>
-        <label for="observacao">Observação do Histórico:</label>
-        <textarea id="observacao" name="observacao" required></textarea>
-        <span class="text-danger">@Html.ValidationMessage("observacao")</span>
-    </div>
-    <button type="submit">Salvar</button>
-</form>
+        <div class="form-group row">
+            <!-- Fornecedor -->
+            <div class="col-md-6">
+                <label asp-for="Amostra.Fornecedor" class="form-label">Fornecedor</label>
+                <textarea asp-for="Amostra.Fornecedor" class="form-control form-control-sm" placeholder="Indique o Fornecedor"></textarea>
+                <span asp-validation-for="Amostra.Fornecedor" class="text-danger"></span>
+            </div>
 
-<a asp-page="./Index">Voltar para a Lista</a>
+            <!-- Aplicação -->
+            <div class="col-md-6">
+                <label asp-for="Amostra.Aplicacao" class="form-label">Aplicação</label>
+                <textarea asp-for="Amostra.Aplicacao" class="form-control form-control-sm" placeholder="Qual é a Aplicação"></textarea>
+                <span asp-validation-for="Amostra.Aplicacao" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="form-group col-md-6">
+            <label asp-for="Amostra.Descricao">Descrição</label>
+            <textarea asp-for="Amostra.Descricao" class="form-control form-control-sm" placeholder="Digite a descrição"></textarea>
+            <span asp-validation-for="Amostra.Descricao" class="text-danger"></span>
+        </div>
+
+        <!-- Responsável -->
+        <div class="form-group col-md-6">
+            <label asp-for="Amostra.ResponsavelNome">Responsável</label>
+            <input asp-for="Amostra.ResponsavelNome" class="form-control form-control-sm" placeholder="Digite o nome do responsável" />
+            <span asp-validation-for="Amostra.ResponsavelNome" class="text-danger"></span>
+        </div>
+
+        <!-- Histórico -->
+        <div class="form-group col-md-6">
+            <label for="historicoObservacao">Histórico</label>
+            <textarea id="historicoObservacao" name="historicoObservacao" class="form-control form-control-sm" rows="3" placeholder="Adicione o Histórico"></textarea>
+            <span class="text-danger">@Html.ValidationMessage("historicoObservacao")</span>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <button type="submit" class="btn btn-primary w-25">Salvar</button>
+            <a asp-page="./Index" class="btn btn-secondary w-25">Voltar para a Lista</a>
+        </div>
+    </form>
+</div>

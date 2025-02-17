@@ -112,3 +112,24 @@ footer {
     padding: 1rem;
     z-index: 1000; /* Garante que o footer fique acima de outros elementos */
 }
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px; /* Menu compacto */
+    }
+
+    .main-content {
+        margin-left: 80px; /* Ajuste para o menu compacto */
+    }
+
+    .sidebar ul li a span {
+        display: none; /* Oculta o texto dos links */
+    }
+}
+
+/* Adicione este CSS ao seu arquivo de estilos */
+.form-control-sm {
+    font-size: 0.875rem; /* Ajuste o tamanho da fonte */
+    padding: 0.25rem 0.5rem; /* Ajuste o preenchimento */
+}
+

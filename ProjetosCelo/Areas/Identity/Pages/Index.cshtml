@@ -4,10 +4,122 @@
     ViewData["Title"] = "Página Inicial";
 }
 
-<h1>Bem-vindo ao Sistema</h1>
-<p>Aqui se iniciam grandes projetos.</p>
+<!-- Botão para Abrir o Menu -->
+<button id="menuToggle" class="menu-toggle-btn">☰</button>
 
-<div class="action-buttons">
-    <a asp-page="/Amostras/Create" class="btn btn-primary">Cadastrar Nova Amostra</a>
-    <a asp-page="/Amostras/Index" class="btn btn-secondary">Listar Amostras</a>
+<!-- Menu Lateral -->
+<div class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <h3>Menu</h3>
+    <ul>
+        <li><a asp-page="/Amostras/Create">Cadastrar Nova Amostra</a></li>
+        <li><a asp-page="/Amostras/Index">Listar Amostras</a></li>
+        <!-- Adicione mais links aqui conforme necessário -->
+        <li><a href="#">Futuro Link</a></li>
+    </ul>
 </div>
+
+<!-- Conteúdo Principal -->
+<div class="main-content">
+    <h1>Bem-vindo ao Sistema</h1>
+    <p>Aqui se iniciam grandes projetos.</p>
+</div>
+
+<!-- Estilo CSS Inline -->
+<style>
+    /* Estilo do Botão de Alternância */
+    .menu-toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        font-size: 24px;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1001;
+        border-radius: 5px;
+    }
+
+    /* Estilo do Menu Lateral */
+    .sidebar {
+        height: 100vh; /* Altura total da tela */
+        width: 250px; /* Largura fixa */
+        position: fixed;
+        top: 0;
+        left: -250px; /* Posição inicial (escondido) */
+        background-color: #2c3e50;
+        color: white;
+        padding-top: 20px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        transition: left 0.3s ease; /* Animação suave */
+        z-index: 1000;
+    }
+
+        .sidebar.open {
+            left: 0; /* Posição quando visível */
+        }
+
+        .sidebar .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            .sidebar ul li {
+                margin: 15px 0;
+            }
+
+                .sidebar ul li a {
+                    color: white;
+                    text-decoration: none;
+                    font-size: 1rem;
+                    padding: 10px 15px;
+                    display: block;
+                    transition: background-color 0.3s;
+                }
+
+                    .sidebar ul li a:hover {
+                        background-color: #34495e;
+                        border-radius: 5px;
+                    }
+
+    /* Estilo do Conteúdo Principal */
+    .main-content {
+        margin-left: 60px; /* Espaço para o botão de alternância */
+        padding: 20px;
+    }
+
+        .main-content h1 {
+            margin-top: 0;
+        }
+</style>
+
+<!-- Script para Controlar o Menu -->
+<script>
+    // Função para alternar a visibilidade do menu
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+    }
+
+    // Adiciona evento ao botão de alternância
+    document.getElementById('menuToggle').addEventListener('click', toggleSidebar);
+</script>

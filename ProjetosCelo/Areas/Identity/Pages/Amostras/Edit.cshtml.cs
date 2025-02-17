@@ -21,9 +21,7 @@ namespace ProjetosCelo.Pages.Amostras
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Amostra = await _context.Amostras
-                .Include(a => a.Historicos) // Inclui os históricos relacionados
-                .FirstOrDefaultAsync(a => a.Id == id);
+            Amostra = await _context.Amostras.FindAsync(id);
 
             if (Amostra == null)
             {
@@ -33,39 +31,59 @@ namespace ProjetosCelo.Pages.Amostras
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string observacao)
+        public async Task<IActionResult> OnPostAsync(string historicoObservacao)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            var amostraOriginal = await _context.Amostras
-                .Include(a => a.Historicos)
-                .FirstOrDefaultAsync(a => a.Id == Amostra.Id);
+            var amostraToUpdate = await _context.Amostras.FindAsync(Amostra.Id);
 
-            if (amostraOriginal == null)
+            if (amostraToUpdate == null)
             {
                 return NotFound();
             }
 
             // Atualiza os campos da amostra
-            amostraOriginal.Nome = Amostra.Nome;
-            amostraOriginal.Descricao = Amostra.Descricao;
-            amostraOriginal.ResponsavelNome = Amostra.ResponsavelNome;
+            amostraToUpdate.Nome = Amostra.Nome;
+            amostraToUpdate.Fornecedor = Amostra.Fornecedor;
+            amostraToUpdate.Aplicacao = Amostra.Aplicacao;
+            amostraToUpdate.Descricao = Amostra.Descricao;
+            amostraToUpdate.ResponsavelNome = Amostra.ResponsavelNome;
 
-            // Adiciona um novo registro de histórico com a observação manual
-            amostraOriginal.Historicos.Add(new Historico
+            // Adiciona o histórico, se fornecido
+            if (!string.IsNullOrEmpty(historicoObservacao))
             {
-                Observacao = observacao,
-                Data = DateTime.Now // Inclui data e hora atual
-            });
+                amostraToUpdate.Historicos.Add(new Historico
+                {
+                    Observacao = historicoObservacao,
+                    Data = DateTime.Now
+                });
+            }
 
-            // Salva as alterações no banco de dados
-            _context.Attach(amostraOriginal).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AmostraExists(Amostra.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return RedirectToPage("./Index");
+        }
+
+        private bool AmostraExists(int id)
+        {
+            return _context.Amostras.Any(e => e.Id == id);
         }
     }
 }

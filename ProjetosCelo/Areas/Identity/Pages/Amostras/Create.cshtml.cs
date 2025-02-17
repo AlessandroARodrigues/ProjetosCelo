@@ -27,6 +27,12 @@ namespace ProjetosCelo.Areas.Identity.Pages.Amostras
         {
             if (!ModelState.IsValid)
             {
+                // Inspeciona os erros de validação
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
                 return Page();
             }
 
@@ -45,5 +51,6 @@ namespace ProjetosCelo.Areas.Identity.Pages.Amostras
 
             return RedirectToPage("/Amostras/Index");
         }
+
     }
 }

@@ -230,7 +230,15 @@ namespace ProjetosCelo.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Aplicacao")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Fornecedor")
                         .IsRequired()
                         .HasColumnType("longtext");
 
