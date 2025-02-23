@@ -29,19 +29,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// Opção 2: AddIdentity (Avançado, com Roles)
-// builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-// {
-//     options.Password.RequireDigit = true;
-//     options.Password.RequireLowercase = false;
-//     options.Password.RequireUppercase = false;
-//     options.Password.RequireNonAlphanumeric = false;
-//     options.Password.RequiredLength = 6;
-//     options.User.RequireUniqueEmail = false; // Permite que o email seja nulo ou não único
-// })
-// .AddEntityFrameworkStores<ApplicationDbContext>()
-// .AddDefaultTokenProviders();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
